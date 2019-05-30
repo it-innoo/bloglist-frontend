@@ -15,7 +15,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "airbnb"
   },
   "proxy": "http://localhost:3001",
   "browserslist": [
