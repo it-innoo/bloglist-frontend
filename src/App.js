@@ -7,6 +7,7 @@ import LoginForm from './components/LoginForm';
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [message, setMessage] = useState(null)
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -42,7 +43,10 @@ const App = () => {
       console.log('Logged in with user ', user)
 
     } catch (error) {
-      console.log('käyttäjätunnus tai salasana virheellinen')
+      setMessage('käyttäjätunnus tai salasana virheellinen')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     }
   }
 
@@ -55,6 +59,7 @@ const App = () => {
   const loginForm = () => {
     return (
       <LoginForm
+        message={message}
         username={username}
         password={password}
         onUsernameChange={handleUsernameChange}
