@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Notification from './Notification'
 import blogService from '../services/blogs'
 
 
@@ -6,6 +7,7 @@ const BlogForm = (props) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [message, setMessage] = useState(null)
 
 
   const addBlog = async (event) => {
@@ -22,9 +24,17 @@ const BlogForm = (props) => {
         .create(newBlog)
 
       props.addHandler()
+      
       setAuthor('')
       setTitle('')
       setUrl('')
+
+      setMessage(
+        `a new blog ${newBlog.title} by ${newBlog.author} added`
+      )
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     } catch (error) {
       console.log(error)
     }
@@ -49,6 +59,10 @@ const BlogForm = (props) => {
   return (
     <div>
       <h2>create new</h2>
+      <Notification
+        message={message}
+        className='info'
+      />
       <form onSubmit={addBlog}>
         <div>
           title
