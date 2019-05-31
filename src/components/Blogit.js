@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Blog from './Blog'
 import BlogForm from './BlogForm'
+import blogService from '../services/blogs'
 
 const Blogit = (props) => {
-  console.log('Blogit props: ', props)
+  const [blogs, setBlogs] = useState([])
+
+  useEffect(() => {
+    blogService.getAll().then(blogs =>
+      setBlogs( blogs )
+    )  
+  }, [])
+
+  const addBlog = (event) => {
+    blogService.getAll().then(blogs =>
+      setBlogs( blogs )
+    )
+  }
+
   return (
     <div>
       <h2>blogs</h2>
@@ -13,10 +27,11 @@ const Blogit = (props) => {
       <button onClick={props.logoutHandler}>logout</button>
 
       <BlogForm
-        blogit={props.blogs}
+        blogit={blogs}
+        addHandler={addBlog}
       />
 
-      {props.blogs.map(blog =>
+      {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
     </div>

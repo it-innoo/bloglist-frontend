@@ -16,13 +16,15 @@ const BlogForm = (props) => {
       author: author,
       url: url,
     }
-    console.log('Uusi Blogi: ', newBlog)
+
     try {
-      const blog = await blogService
+      await blogService
         .create(newBlog)
 
-      console.log('Props: ', props)
-      console.log('New blog: ', blog)
+      props.addHandler()
+      setAuthor('')
+      setTitle('')
+      setUrl('')
     } catch (error) {
       console.log(error)
     }
@@ -46,8 +48,6 @@ const BlogForm = (props) => {
 
   return (
     <div>
-    console.log('BlogForm woarking...')
-
       <h2>create new</h2>
       <form onSubmit={addBlog}>
         <div>

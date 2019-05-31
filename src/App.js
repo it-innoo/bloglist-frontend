@@ -1,27 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import Blog from './components/Blog'
-import blogService from './services/blogs'
 import Blogit from './components/Blogit'
+import blogService from './services/blogs'
 import loginService from './services/login'
 import LoginForm from './components/LoginForm';
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
-  }, [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedInUser')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
+      blogService.setToken(user.token)
     }
   }, [])
 
@@ -42,6 +35,7 @@ const App = () => {
       window.localStorage.setItem(
         'loggedInUser', JSON.stringify(user)
       )
+      blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
@@ -75,7 +69,6 @@ const App = () => {
     return (
       <Blogit
         user={user}
-        blogs={blogs}
         logoutHandler={handleLogout}
       />
     )
