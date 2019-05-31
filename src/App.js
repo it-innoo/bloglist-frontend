@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
+import Blogit from './components/Blogit'
 import loginService from './services/login'
+import LoginForm from './components/LoginForm';
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -56,45 +58,35 @@ const App = () => {
     console.log(`${user.name} logged out`)
   }
 
-  if (user === null) {
+  const loginForm = () => {
     return (
-      <div>
-      <h2>log into application</h2>
-      
-      <form onSubmit={handleLogin}>
-        <div>
-          käyttäjätunnus
-          <input
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-        </div>
-        <div>
-          salasana
-            <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <button type="submit">kirjaudu</button>
-      </form>
-      </div>
+      <LoginForm
+        username={username}
+        password={password}
+        onUsernameChange={handleUsernameChange}
+        onPasswordChange={handlePasswordChange}
+        onSubmit={handleLogin}
+      />
+    )
+    
+  }
+
+  const blogit = () => {
+    return (
+      <Blogit
+        user={user}
+        blogs={blogs}
+        logoutHandler={handleLogout}
+      />
     )
   }
 
   return (
     <div>
-      <h2>blogs</h2>
-      <p>
-        {user.name} logged in
-      </p>
-      <button onClick={handleLogout}>logout</button>
-
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      {user === null ?
+        loginForm() :
+        blogit()
+      }
     </div>
   )
 }
