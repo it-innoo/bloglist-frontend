@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
-
+import blogService from '../services/blogs'
 
 const Blog = ({ blog }) => {
   const [showAll, setShowAll] = useState(false)
 
   const handleClick = (event) => {
+    event.preventDefault()
     setShowAll(!showAll)
-    console.log(`showAll: ${showAll}`)
   }
-  
+
+  const handleLikes = (event) => {
+    event.preventDefault()
+    const likedBlog = { ...blog, likes: blog.likes +=1}
+    try {
+      blogService.like(likedBlog.id, likedBlog)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const showBlog = () => {
     return (
       <div>
@@ -19,7 +29,6 @@ const Blog = ({ blog }) => {
   }
 
   const showBlogDetails = () => {
-    console.log(blog)
     return (
       <div>
         <p>
@@ -30,7 +39,9 @@ const Blog = ({ blog }) => {
         </a>
         <p>
           {blog.likes} tykkäystä
-          <button>like</button>
+          <button onClick={handleLikes}>
+            like
+          </button>
         </p>
         <p>
           Added by {blog.user[0].name}
