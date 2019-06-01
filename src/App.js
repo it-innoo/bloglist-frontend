@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Blogit from './components/Blogit'
 import blogService from './services/blogs'
 import loginService from './services/login'
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/LoginForm'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [username, setUsername] = useState('')
@@ -57,14 +58,16 @@ const App = () => {
 
   const loginForm = () => {
     return (
-      <LoginForm
-        message={message}
-        username={username}
-        password={password}
-        onUsernameChange={handleUsernameChange}
-        onPasswordChange={handlePasswordChange}
-        onSubmit={handleLogin}
-      />
+      <Togglable buttonLabel="login">
+        <LoginForm
+          message={message}
+          username={username}
+          password={password}
+          onUsernameChange={handleUsernameChange}
+          onPasswordChange={handlePasswordChange}
+          onSubmit={handleLogin}
+        />
+      </Togglable>
     )
     
   }
@@ -80,10 +83,15 @@ const App = () => {
 
   return (
     <div>
+      <h1>Blogs</h1>
       {user === null ?
         loginForm() :
-        blogit()
+        <div>
+          <p>{user.name} logged in</p>
+          <button onClick={handleLogout}>logout</button>
+        </div>
       }
+      { blogit() }
     </div>
   )
 }

@@ -1,34 +1,41 @@
 import React from 'react'
 import Notification from './Notification'
 
-const LoginForm = props => {
+const LoginForm = ({
+  message,
+  username,
+  password,
+  onUsernameChange,
+  onPasswordChange,
+  onSubmit,
+}) => {
   return (
     <div>
       <h2>log into application</h2>
       <Notification
-        message={props.message}
+        message={message}
         className='error'
       />
 
-    <form onSubmit={props.onSubmit}>
-    <div>
+      <form onSubmit={onSubmit}>
+        <div>
           käyttäjätunnus
           <input
             type="text"
-            placeholder={props.username}
-            onChange={props.onUsernameChange}
+            placeholder={username}
+            onChange={onUsernameChange}
           />
         </div>
         <div>
           salasana
-            <input
+          <input
             type="password"
-            placeholder={props.password}
-            onChange={props.onPasswordChange}
+            placeholder={password}
+            onChange={onPasswordChange}
           />
         </div>
         <button type="submit">kirjaudu</button>
-    </form>
+      </form>
     </div>
   )
 }

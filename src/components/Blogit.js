@@ -7,26 +7,15 @@ const Blogit = (props) => {
   const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
+    blogService.getAll().then(blogit => setBlogs(blogit))
   }, [])
 
-  const addBlog = (event) => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )
+  const addBlog = () => {
+    blogService.getAll().then(blogit => setBlogs(blogit))
   }
 
   return (
     <div>
-      <h2>blogs</h2>
-      
-      <p>
-        {props.user.name} logged in
-      </p>
-      <button onClick={props.logoutHandler}>logout</button>
-
       <BlogForm
         blogit={blogs}
         addHandler={addBlog}
