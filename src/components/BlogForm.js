@@ -3,11 +3,12 @@ import Notification from './Notification'
 import blogService from '../services/blogs'
 
 
-const BlogForm = (props) => {
+const BlogForm = ({ blogit, addHandler }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [message, setMessage] = useState(null)
+  const [className, setClassName] = useState('note')
 
 
   const addBlog = async (event) => {
@@ -23,7 +24,7 @@ const BlogForm = (props) => {
       await blogService
         .create(newBlog)
 
-      props.addHandler()
+      addHandler()
       
       setAuthor('')
       setTitle('')
@@ -36,7 +37,11 @@ const BlogForm = (props) => {
         setMessage(null)
       }, 5000)
     } catch (error) {
-      console.log(error)
+      setMessage('Unauthorized')
+      setClassName('error')
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     }
     
   }
@@ -61,7 +66,7 @@ const BlogForm = (props) => {
       <h2>create new</h2>
       <Notification
         message={message}
-        className='info'
+        className={className}
       />
       <form onSubmit={addBlog}>
         <div>

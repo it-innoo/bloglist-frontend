@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './Blog'
 import BlogForm from './BlogForm'
+import Togglable from './Togglable'
 import blogService from '../services/blogs'
 
 const Blogit = (props) => {
@@ -14,13 +15,20 @@ const Blogit = (props) => {
     blogService.getAll().then(blogit => setBlogs(blogit))
   }
 
+  const blogForm = () => {
+    return (
+      <Togglable buttonLabel="create blog">
+        <BlogForm
+          blogit={blogs}
+          addHandler={addBlog}
+        />
+      </Togglable>
+    )
+  }
+
   return (
     <div>
-      <BlogForm
-        blogit={blogs}
-        addHandler={addBlog}
-      />
-
+      {blogForm()}
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}

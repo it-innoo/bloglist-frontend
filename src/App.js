@@ -52,8 +52,11 @@ const App = () => {
 
   const handleLogout = (event) => {
     window.localStorage.clear()
+    setMessage(`${user.name} logged out`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000)
     setUser(null)
-    console.log(`${user.name} logged out`)
   }
 
   const loginForm = () => {
@@ -69,7 +72,6 @@ const App = () => {
         />
       </Togglable>
     )
-    
   }
 
   const blogit = () => {
