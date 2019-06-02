@@ -11,7 +11,7 @@ const Blog = ({ blog }) => {
 
   const handleLikes = (event) => {
     event.preventDefault()
-    const likedBlog = { ...blog, likes: blog.likes +=1}
+    const likedBlog = { ...blog, likes: blog.likes +=1 }
     try {
       blogService.like(likedBlog.id, likedBlog)
     } catch (error) {
@@ -82,7 +82,7 @@ const Blog = ({ blog }) => {
       </div>
     </div>
   )
-  
+
 }
 
 export default Blog

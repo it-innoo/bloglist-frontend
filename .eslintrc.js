@@ -1,10 +1,13 @@
 module.exports = {
     "env": {
-        "node": true,
+        "browser": true,
         "es6": true,
-        "jest": true
+        "jest/globals": true
     },
-    "extends": "react-app",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -12,6 +15,9 @@ module.exports = {
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
+    "plugins": [
+        "react", "jest"
+    ],
     "rules": {
         "indent": [
             "error",
@@ -29,8 +35,16 @@ module.exports = {
             "error",
             "never"
         ],
-        "no-underscore-dangle": ["error", { "allow": ["_id", "__v"] }],
-        "no-param-reassign": ["error", { "props": false }],
-        "no-console": 0
+        "eqeqeq": "error",
+        "no-trailing-spaces": "error",
+        "object-curly-spacing": [
+            "error", "always"
+        ],
+        "arrow-spacing": [
+            "error", { "before": true, "after": true }
+        ],
+        "no-console": 0,
+        "react/display-name": 0,
+        "react/prop-types": 0
     }
 };

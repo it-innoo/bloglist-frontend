@@ -30,7 +30,7 @@ const Togglable = React.forwardRef((props, ref) => {
         <button onClick={toggleVisibility}>cancel</button>
       </div>
     </div>
-  )  
+  )
 })
 
 Togglable.propTypes = {
