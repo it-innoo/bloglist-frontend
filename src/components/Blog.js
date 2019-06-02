@@ -3,7 +3,6 @@ import blogService from '../services/blogs'
 
 const Blog = ({ blog }) => {
   const [showAll, setShowAll] = useState(false)
-  const [setBlogs] = useState([])
 
   const handleClick = (event) => {
     event.preventDefault()
@@ -22,11 +21,9 @@ const Blog = ({ blog }) => {
 
   const handleRemove = (event) => {
     event.preventDefault()
-    console.log('remove button clicked')
     try {
       if (window.confirm(`remove blog ${blog.title}`)) {
         blogService.remove(blog.id)
-        blogService.getAll().then(blogit => setBlogs(blogit))
       }
     } catch (error) {
       console.log('error is: ', error)
