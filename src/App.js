@@ -50,7 +50,7 @@ const App = () => {
     }
   }
 
-  const handleLogout = (event) => {
+  const handleLogout = () => {
     window.localStorage.clear()
     setMessage(`${user.name} logged out`)
     setTimeout(() => {

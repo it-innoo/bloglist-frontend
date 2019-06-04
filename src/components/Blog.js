@@ -32,11 +32,10 @@ const Blog = ({ blog }) => {
 
   const showBlog = () => {
     return (
-      <div>
-        <p>
-          {blog.title} {blog.author}
-        </p>
-      </div>)
+      <p>
+        {blog.title} {blog.author}
+      </p>
+    )
   }
 
   const showBlogDetails = () => {
@@ -49,37 +48,36 @@ const Blog = ({ blog }) => {
         <p>
           {blog.title} {blog.author}
         </p>
-        <a href={blog.url}  rel="noopener noreferrer" target="_blank">
-          {blog.url}
-        </a>
-        <p>
-          {blog.likes} tykkäystä
-          <button onClick={handleLikes}>
+        <div className="blogDetails">
+          <a href={blog.url}  rel="noopener noreferrer" target="_blank">
+            {blog.url}
+          </a>
+          <p>
+            {blog.likes} tykkäystä
+            <button onClick={handleLikes}>
             like
-          </button>
-        </p>
-        <p>
+            </button>
+          </p>
+          <p>
           Added by {blog.user[0].name}
-        </p>
-        { user && JSON.parse(user).name === blog.user[0].name ?
-          <button onClick={handleRemove}>
+          </p>
+          { user && JSON.parse(user).name === blog.user[0].name ?
+            <button onClick={handleRemove}>
             poista
-          </button> :
-          <p></p>
-        }
-
+            </button> :
+            <p></p>
+          }
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="blog">
-      <div onClick={handleClick}>
-        {showAll ?
-          showBlogDetails() :
-          showBlog()
-        }
-      </div>
+    <div className="blog" onClick={handleClick}>
+      {showAll ?
+        showBlogDetails() :
+        showBlog()
+      }
     </div>
   )
 
