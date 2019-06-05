@@ -32,9 +32,11 @@ const Blog = ({ blog }) => {
 
   const showBlog = () => {
     return (
-      <p>
-        {blog.title} {blog.author}
-      </p>
+      <div>
+        <p>
+          {blog.title} {blog.author}
+        </p>
+      </div>
     )
   }
 

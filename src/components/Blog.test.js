@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, prettyDOM } from '@testing-library/react'
+import { render, fireEvent, act, waitForElement, prettyDOM } from '@testing-library/react'
 import Blog from './Blog'
 
 describe('<Blog />', () => {
@@ -14,11 +14,20 @@ describe('<Blog />', () => {
     ]
   }
 
-  it('renders title and author by default', () => {
+  it('renders title and author by default', async () => {
+    /*
     const component = render(
       <Blog blog={blog}/>
     )
+*/
+    let component
+    act(() => {
+      component = render(<Blog blog={blog}/>)
+    })
 
+    await waitForElement(
+      () => component.container.querySelector('.blog')
+    )
     const div = component.container.querySelector('.blog')
 
     expect(div).toHaveTextContent(
@@ -27,14 +36,25 @@ describe('<Blog />', () => {
     expect(div).not.toHaveTextContent(
       'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll'
     )
-  //  console.log(prettyDOM(div))
+    console.log(prettyDOM(div))
   })
 
-  it('renders all info by clicking', () => {
+  it('renders all info by clicking', async () => {
     const mockHandler = jest.fn()
-
+    /*
     const component = render(
       <Blog blog={blog} onClick={mockHandler} />
+    )
+    */
+    let component
+    act(() => {
+      component = render(
+        <Blog blog={blog} onClick={mockHandler} />
+      )
+    })
+
+    await waitForElement(
+      () => component.container.querySelector('.blog')
     )
 
     const div = component.container.querySelector('.blog')
