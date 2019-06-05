@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, prettyDOM } from 'react-testing-library'
+import { render, fireEvent, prettyDOM } from '@testing-library/react'
 import Blog from './Blog'
 
 describe('<Blog />', () => {
@@ -14,7 +14,7 @@ describe('<Blog />', () => {
     ]
   }
 
-  it('renders title and author', () => {
+  it('renders title and author by default', () => {
     const component = render(
       <Blog blog={blog}/>
     )
@@ -27,12 +27,7 @@ describe('<Blog />', () => {
     expect(div).not.toHaveTextContent(
       'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll'
     )
-    console.log(prettyDOM(div))
-  })
-
-  it('displays the count', () => {
-    const { queryByText } = render(<Blog blog={blog} />)
-    expect(queryByText('tykkäystä')).toBeNull()
+  //  console.log(prettyDOM(div))
   })
 
   it('renders all info by clicking', () => {
@@ -55,8 +50,8 @@ describe('<Blog />', () => {
     expect(element).toHaveTextContent(
       'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll'
     )
-    
-    console.log(prettyDOM(element))
+
+    //  console.log(prettyDOM(element))
 
   })
 })
