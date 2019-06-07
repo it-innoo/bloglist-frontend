@@ -15,11 +15,6 @@ describe('<Blog />', () => {
   }
 
   it('renders title and author by default', async () => {
-    /*
-    const component = render(
-      <Blog blog={blog}/>
-    )
-*/
     let component
     act(() => {
       component = render(<Blog blog={blog}/>)
@@ -40,11 +35,6 @@ describe('<Blog />', () => {
 
   it('renders all info by clicking', async () => {
     const mockHandler = jest.fn()
-    /*
-    const component = render(
-      <Blog blog={blog} onClick={mockHandler} />
-    )
-    */
     let component
     act(() => {
       component = render(
@@ -69,8 +59,6 @@ describe('<Blog />', () => {
     expect(element).toHaveTextContent(
       'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll'
     )
-
-    //  console.log(prettyDOM(element))
 
   })
 })

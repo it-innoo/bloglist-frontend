@@ -4,11 +4,10 @@ import { render,  waitForElement, act } from '@testing-library/react'
 jest.mock('./services/blogs')
 import App from './App'
 
-/*
 beforeAll(() => {
   return localStorage.clear()
 })
-*/
+
 describe('<App />', () => {
   describe('when no user logged in', () => {
     let user
@@ -48,7 +47,6 @@ describe('<App />', () => {
         () => component.container.querySelector('.btn-login')
       )
 
-      component.debug()
       let button = component
         .container
         .querySelector('.btn-login')
@@ -57,7 +55,18 @@ describe('<App />', () => {
     })
 
     it('does not show create blog button', async () => {
+      expect(user).toBeNull()
 
+      let component
+      act(() => {
+        component = render(<App />)
+      })
+
+      let button = component
+        .container
+        .querySelector('btn-blogform')
+
+      expect(button).toBeNull()
     })
   })
 
@@ -68,31 +77,23 @@ describe('<App />', () => {
       name: 'Teuvo Testaaja'
     }
 
-    let user
-
     beforeEach(() => {
       localStorage
         .setItem('loggedinUser', JSON.stringify(tester))
-      user = localStorage
+    })
+
+    it('shows logged user and logout button', async () => {
+      const loggedUserJSON = localStorage
         .getItem('loggedinUser')
-    })
+      const user = JSON.parse(loggedUserJSON)
 
-    it('renders all blogs', async () => {
-      expect(user).not.toBeNull()
-    })
-
-    it('shows logout button', async () => {
-      expect(user).not.toBeNull()
-      expect(user).toBeDefined()
-      expect(user).toEqual(JSON.stringify(tester))
-
-      console.log(localStorage)
+      expect(user.name).toBe('Teuvo Testaaja')
 
       let component
       act(() => {
         component = render(<App />)
       })
-      /*
+
       await waitForElement(
         () => component.container.querySelector('.btn-logout')
       )
@@ -102,11 +103,45 @@ describe('<App />', () => {
         .querySelector('.btn-logout')
 
       expect(button).toBeDefined()
-*/
+
+      await waitForElement(
+        () => component.container.querySelector('.blog')
+      )
+
+      const blogs = component
+        .container
+        .querySelectorAll('.blog')
+      expect(blogs.length).toBe(6)
     })
 
-    it('shows create blog button', async () => {
+    it('renders all blogs', async () => {
+      const loggedUserJSON = localStorage
+        .getItem('loggedinUser')
+      const user = JSON.parse(loggedUserJSON)
 
+      expect(user.name).toBe('Teuvo Testaaja')
+
+      let component
+      act(() => {
+        component = render(<App />)
+      })
+
+      await waitForElement(
+        () => component.container.querySelector('.blog'),
+      )
+
+      const blogs = component
+        .container
+        .querySelectorAll('.blog')
+      expect(blogs.length).toBe(6)
+
+      const button = component
+        .container
+        .querySelectorAll('.btn-blogform')
+
+      component.debug()
+      expect(button).not.toBeNull()
     })
+
   })
 })

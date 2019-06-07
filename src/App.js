@@ -13,8 +13,7 @@ const App = () => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage
-      .getItem('loggedInUser')
-    // console.log('In App user: ', loggedUserJSON)
+      .getItem('loggedinUser')
 
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
@@ -22,6 +21,7 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value)
@@ -34,8 +34,9 @@ const App = () => {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService
-        .login({ username, password })
+      const user = await loginService.login({
+        username, password
+      })
 
       window.localStorage.setItem(
         'loggedinUser', JSON.stringify(user)
@@ -44,7 +45,6 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
-
     } catch (error) {
       setMessage('käyttäjätunnus tai salasana virheellinen')
       setTimeout(() => {

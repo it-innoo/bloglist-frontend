@@ -11,13 +11,13 @@ const Blogit = () => {
     blogService.getAll().then(blogit => setBlogs(blogit))
   }, [])
 
+  const blogFormRef = React.createRef()
 
   const addBlog = () => {
     blogService.getAll().then(blogit => setBlogs(blogit))
     blogFormRef.current.toggleVisibility()
   }
 
-  const blogFormRef = React.createRef()
 
   const blogForm = () => {
     return (
@@ -33,9 +33,11 @@ const Blogit = () => {
     )
   }
 
+  const user = window.localStorage.getItem('loggedinUser')
+
   return (
     <div>
-      {blogForm()}
+      {user !== null && blogForm()}
       {blogs
         .sort((a, b) => b.likes - a.likes)
         .map(blog =>

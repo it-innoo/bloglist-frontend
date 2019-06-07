@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Notification from './Notification'
 import blogService from '../services/blogs'
 
-const BlogForm = ({ blogit, addHandler }) => {
+const BlogForm = ({ addHandler }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -23,7 +23,7 @@ const BlogForm = ({ blogit, addHandler }) => {
         .create(newBlog)
 
       addHandler()
-      
+
       setAuthor('')
       setTitle('')
       setUrl('')
@@ -42,7 +42,7 @@ const BlogForm = ({ blogit, addHandler }) => {
         setMessage(null)
       }, 5000)
     }
-    
+
   }
 
   const handleAuthorChange = (event) => {
@@ -67,7 +67,7 @@ const BlogForm = ({ blogit, addHandler }) => {
         message={message}
         className={className}
       />
-      <form onSubmit={addBlog}>
+      <form className="form-blog" onSubmit={addBlog}>
         <div>
           title
           <input

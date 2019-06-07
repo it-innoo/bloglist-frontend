@@ -33,7 +33,7 @@ const Blog = ({ blog }) => {
   const showBlog = () => {
     return (
       <div>
-        <p>
+        <p key={blog.id}>
           {blog.title} {blog.author}
         </p>
       </div>
@@ -47,7 +47,7 @@ const Blog = ({ blog }) => {
 
     return (
       <div>
-        <p>
+        <p key={blog.id}>
           {blog.title} {blog.author}
         </p>
         <div className="blogDetails">
