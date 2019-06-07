@@ -12,7 +12,10 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedInUser')
+    const loggedUserJSON = window.localStorage
+      .getItem('loggedInUser')
+    // console.log('In App user: ', loggedUserJSON)
+
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -35,7 +38,7 @@ const App = () => {
         .login({ username, password })
 
       window.localStorage.setItem(
-        'loggedInUser', JSON.stringify(user)
+        'loggedinUser', JSON.stringify(user)
       )
       blogService.setToken(user.token)
       setUser(user)
@@ -61,7 +64,7 @@ const App = () => {
 
   const loginForm = () => {
     return (
-      <Togglable buttonLabel="login">
+      <Togglable buttonLabel="login" className="btn-login">
         <LoginForm
           message={message}
           username={username}
@@ -88,7 +91,9 @@ const App = () => {
         loginForm() :
         <div>
           <p>{user.name} logged in</p>
-          <button onClick={handleLogout}>logout</button>
+          <button className="btn-logout" onClick={handleLogout}>
+            logout
+          </button>
         </div>
       }
       { blogit() }

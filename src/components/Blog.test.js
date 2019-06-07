@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, act, waitForElement, prettyDOM } from '@testing-library/react'
+import { render, fireEvent, act, waitForElement } from '@testing-library/react'
 import Blog from './Blog'
 
 describe('<Blog />', () => {
@@ -36,7 +36,6 @@ describe('<Blog />', () => {
     expect(div).not.toHaveTextContent(
       'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll'
     )
-    console.log(prettyDOM(div))
   })
 
   it('renders all info by clicking', async () => {

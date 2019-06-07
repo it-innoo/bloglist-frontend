@@ -43,7 +43,7 @@ const Blog = ({ blog }) => {
   const showBlogDetails = () => {
     const user = window
       .localStorage
-      .getItem('loggedInUser')
+      .getItem('loggedinUser')
 
     return (
       <div>

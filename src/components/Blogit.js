@@ -21,7 +21,10 @@ const Blogit = () => {
 
   const blogForm = () => {
     return (
-      <Togglable buttonLabel="create blog" ref={blogFormRef}>
+      <Togglable
+        buttonLabel="create blog"
+        className="btn-blogform"
+        ref={blogFormRef}>
         <BlogForm
           blogit={blogs}
           addHandler={addBlog}
